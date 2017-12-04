@@ -11,3 +11,15 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+
+# DO NOT share history between all sessions
+unsetopt SHARE_HISTORY
+
+# Force ls to output color, even when output is a pipe
+export CLICOLOR_FORCE=1
+
+tree() {
+  command tree -C "$@" | less
+}
+
+alias watch='watch -c'
