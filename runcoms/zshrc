@@ -23,3 +23,19 @@ tree() {
 }
 
 alias watch='watch -c'
+
+typeset -T -U GOPATH gopath
+export GOPATH
+gopath=(
+  $HOME/.go-vendor        # always part of gopath, even if it doesn't exist
+  $HOME/Dropbox/go(N-/)
+  $HOME/go(N-/)
+)
+# Append every existing GOPATH/bin directory to PATH
+path+=(
+  ${^gopath}/bin(N-/)
+)
+# Make it easier to cd into a Go project, e.g.: cd github.com/rhcarvalho/...
+cdpath+=(
+  ${^gopath}/src(N-/)
+)
