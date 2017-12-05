@@ -39,3 +39,10 @@ path+=(
 cdpath+=(
   ${^gopath}/src(N-/)
 )
+
+# Add personal utilities to PATH
+if [[ -d "$HOME/Dropbox/dotfiles/bin" ]]; then
+  path+=(
+    "$HOME/Dropbox/dotfiles/bin"
+  )
+fi
