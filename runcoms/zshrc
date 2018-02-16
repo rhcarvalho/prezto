@@ -40,6 +40,12 @@ cdpath+=(
   ${^gopath}/src(N-/)
 )
 
+# Python virtualenv
+if hash virtualenvwrapper_lazy.sh 2>/dev/null; then
+  VIRTUALENVWRAPPER_PYTHON="$(command which python3)"
+  . virtualenvwrapper_lazy.sh
+fi
+
 # Add personal utilities to PATH
 if [[ -d "$HOME/Dropbox/dotfiles/bin" ]]; then
   path+=(
