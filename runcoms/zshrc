@@ -52,3 +52,6 @@ if [[ -d "$HOME/Dropbox/dotfiles/bin" ]]; then
     "$HOME/Dropbox/dotfiles/bin"
   )
 fi
+
+# Configure etcdctl
+export ETCDCTL_API=3
