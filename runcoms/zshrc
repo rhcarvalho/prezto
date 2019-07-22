@@ -22,4 +22,12 @@ tree() {
   command tree -C "$@" | less
 }
 
+[[ $(whence -w man) == *alias ]] && unalias man
+man() {
+  local lightyellow='#FEF49C'
+  tmux select-pane -P "bg=$lightyellow"
+  nocorrect command man "$@"
+  tmux select-pane -P 'default'
+}
+
 alias watch='watch -c'
