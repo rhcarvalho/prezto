@@ -31,6 +31,8 @@ gopath=(
   $HOME/Dropbox/go(N-/)
   $HOME/go(N-/)
 )
+# Prepend latest Go to PATH
+path=($HOME/sdk/go1.18.4/bin $path)
 # Append every existing GOPATH/bin directory to PATH
 path+=(
   ${^gopath}/bin(N-/)
