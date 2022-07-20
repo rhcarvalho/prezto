@@ -42,6 +42,18 @@ cdpath+=(
   ${^gopath}/src(N-/)
 )
 
+# List available module updates for build without special tags
+go-mod-updates() {
+  # Output without "why?"
+  #go list -f $'{{if not (or .Standard .Module.Main)}}{{.Module.Path}}{{end}}' all | sort -u | xargs go list -m -u -e -f '{{if .Update}}{{.}}{{end}}'
+  # Output with "why?"
+  for module in "${(f)$(go list -f '{{if not (or .Standard .Module.Main)}}{{.Module.Path}}{{end}}' all | sort -u | xargs go list -m -u -e -f '{{if .Update}}{{.}}{{end}}')}"; do
+    local m="$(cut -d' ' -f1 <<<$module)"
+    local why="$(go mod why -m $m | grep -Ev "^([#(]|$m)" | sed -z 's/\n\b/ > /g')"
+    echo "$module (via $why)"
+  done
+}
+
 # Python virtualenv
 if hash virtualenvwrapper_lazy-3.sh 2>/dev/null; then
   . virtualenvwrapper_lazy-3.sh
