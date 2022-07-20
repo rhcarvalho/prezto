@@ -68,3 +68,23 @@ fi
 
 # Configure etcdctl
 export ETCDCTL_API=3
+
+# Yarn
+path+=(
+  $(yarn global bin)
+)
+
+# Rust
+[[ -f "$HOME/.cargo/env" ]] && source $HOME/.cargo/env
+
+# zsh parameter completion for the dotnet CLI
+_dotnet_zsh_complete()
+{
+  local completions=("$(dotnet complete "$words")")
+
+  reply=( "${(ps:\n:)completions}" )
+}
+compctl -K _dotnet_zsh_complete dotnet
+
+alias pm=podman
+alias pmc=podman-compose
